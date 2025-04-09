@@ -1,0 +1,83 @@
+Core Problem
+You need to develop a scheduling system for the Sophisticated Learning Association (SLA) that assigns:
+
+A room
+A time slot
+A facilitator
+
+For each activity, considering various constraints and preferences.
+Implementation Steps
+1. Schedule Representation
+You'll need to represent a schedule as a collection of activities, where each activity has:
+
+An assigned room
+A time slot (MWF, 50-minute slots)
+A facilitator
+
+2. Initial Population
+
+Create at least 500 random schedules as your starting population
+Each schedule is a complete assignment of rooms, times, and facilitators to all activities
+
+3. Fitness Function
+The fitness function evaluates how good a schedule is by adding up points for each activity based on various criteria:
+
+Room conflicts: -0.5 if two activities use the same room at the same time
+Room size:
+
+-0.5 if room is too small
+-0.2 if room is 3+ times larger than needed
+-0.4 if room is 6+ times larger than needed
++0.3 otherwise (good fit)
+
+
+Facilitator assignment:
+
++0.5 if using a preferred facilitator
++0.2 if using another listed facilitator
+-0.1 if using any other facilitator
+
+
+Facilitator workload:
+
++0.2 if facilitator has only 1 activity in this time slot
+-0.2 if facilitator has multiple activities at the same time
+-0.5 if facilitator has more than 4 activities total
+-0.4 if facilitator has only 1-2 activities (except Dr. Tyler)
+
+
+Activity-specific rules:
+
+Various bonuses/penalties for SLA 101 and SLA 191 sections (spacing between sections)
+Building location considerations for consecutive activities
+
+
+
+4. Genetic Algorithm Process
+
+Selection: Use softmax normalization to select parents based on fitness
+Crossover: Create new schedules by combining parts of parent schedules
+Mutation: Randomly change some elements with 0.01 probability initially
+Replacement: Create a new generation of schedules
+
+5. Termination
+
+Run at least 100 generations
+Continue until improvement is less than 1% over generation G-100
+Output the best schedule and its fitness score
+
+6. Parameter Tuning
+After initial runs, experiment with halving the mutation rate to see if results improve.
+Alternative Approach
+The assignment also mentions an alternative implementation using a min-heap instead of softmax normalization, which might be simpler but less parallelizable.
+Getting Started
+I recommend breaking this down into smaller tasks:
+
+Create data structures for activities, rooms, facilitators, and the schedule
+Implement the random schedule generator
+Implement the fitness function
+Build the genetic algorithm loop
+Implement selection, crossover, and mutation operators
+Add the termination condition and output functionality
+
+Would you like me to elaborate on any particular part of this assignment?
