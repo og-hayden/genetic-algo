@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Genetic Operations Module for the Scheduling Problem
 This module contains implementations of selection, crossover, and mutation operations.
@@ -7,13 +5,12 @@ This module contains implementations of selection, crossover, and mutation opera
 
 import random
 import copy
-from typing import List, Tuple, Dict, Set, Any, Optional, Union, Callable
+from typing import List, Any, Optional
 import numpy as np
 
 # Import from models module
 from models import (
-    Schedule, Activity, Room, Facilitator, TimeSlot, 
-    ActivityAssignment, MUTATION_RATE
+    Schedule, Room, Facilitator, TimeSlot, MUTATION_RATE
 )
 
 
@@ -278,7 +275,8 @@ def parallel_evaluate_fitness(schedules: List[Schedule],
     Returns:
         List of fitness values
     """
-    # Use a simpler approach without multiprocessing to avoid pickling issues
+    # Use a sequential approach instead of multiprocessing
+    # This is more stable and avoids potential deadlocks or pickling issues
     fitness_values = []
     for schedule in schedules:
         fitness = evaluator.evaluate(schedule)

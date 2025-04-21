@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Test Data Module for Genetic Algorithm Scheduler
 This module provides sample data to test the genetic algorithm scheduling system.
@@ -71,7 +69,7 @@ def create_rooms() -> List[Room]:
 
 def create_time_slots() -> List[TimeSlot]:
     """
-    Create time slots for MWF, assuming 50-minute slots.
+    Create time slots for MWF, 50-minute slots.
     
     Returns:
         List of TimeSlot objects
@@ -109,7 +107,7 @@ def create_activities(facilitators: List[Facilitator]) -> List[Activity]:
     
     # Create activities with SLA 101 and 191 having sections A and B
     activities = [
-        # SLA 101 sections (special case mentioned in assignment)
+        # SLA 101 sections (special case)
         Activity(
             name="SLA 101",
             expected_enrollment=40,
@@ -137,7 +135,7 @@ def create_activities(facilitators: List[Facilitator]) -> List[Activity]:
             ]
         ),
         
-        # SLA 191 sections (special case mentioned in assignment)
+        # SLA 191 sections (special case)
         Activity(
             name="SLA 191",
             expected_enrollment=30,
@@ -198,7 +196,7 @@ def create_activities(facilitators: List[Facilitator]) -> List[Activity]:
                 get_facilitator("Dr. Taylor")
             ],
             other_facilitators=[
-                get_facilitator("Dr. Smith"),
+                get_facilitator("Dr. Smith"), # Hey - my last name is Smith! What are the odds? Smith is such an uncommon last name.
                 get_facilitator("Dr. Brown")
             ]
         ),

@@ -1,24 +1,20 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Genetic Algorithm for Scheduling Optimization
-Author: [Your Name]
-Date: [Current Date]
+Author: Hayden Smith
+Date: 2025-04-16
 
-This program implements a genetic algorithm to optimize room, time, and facilitator 
+This program implements a genetic algorithm to optimize room, time, and facilitator
 assignments for the Sophisticated Learning Association (SLA) activities.
 """
 
+# NOTE: To run this program a super slick, totally legit (too legit to quit, I've heard it said) GUI, run `python main.py --gui`
+
 import random
-import numpy as np
 import time
 import matplotlib.pyplot as plt
-from pathlib import Path
-import json
-import copy
-import multiprocessing as mp
-from concurrent.futures import ProcessPoolExecutor
 from tqdm import tqdm
+import argparse
+import sys
 
 # Import models and constants from models.py
 from models import (
@@ -29,7 +25,7 @@ from models import (
 # Import other modules
 from fitness import FitnessEvaluator
 from genetic_ops import (
-    select_parents, crossover, mutate, generate_next_generation, 
+    generate_next_generation, 
     adaptive_mutation_rate, parallel_evaluate_fitness
 )
 from data import load_test_data
@@ -190,6 +186,37 @@ def plot_fitness_history(best_fitness_history: list[float], avg_fitness_history:
 
 def main() -> None:
     """Main function to run the genetic algorithm for schedule optimization."""
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Genetic Algorithm for Schedule Optimization')
+    parser.add_argument('--gui', action='store_true', help='Launch the GUI visualization interface')
+    parser.add_argument('--debug', action='store_true', help='Enable debug mode for detailed logging')
+    args = parser.parse_args()
+    
+    # Enable debug logging if requested
+    if args.debug:
+        import logging
+        logging.basicConfig(level=logging.DEBUG, 
+                           format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    
+    # If GUI mode is requested, launch the visualization
+    if args.gui:
+        try:
+            from visualization import main as run_visualization
+            print("Starting visualization interface...")
+            run_visualization()
+            return
+        except ImportError as e:
+            print(f"Error loading visualization module: {e}")
+            print("Make sure PyQt5 and matplotlib are installed:")
+            print("pip install PyQt5 matplotlib")
+            sys.exit(1)
+        except Exception as e:
+            import traceback
+            print(f"Error initializing visualization: {e}")
+            traceback.print_exc()
+            sys.exit(1)
+    
+    # Otherwise run the command-line version
     print("Starting Genetic Algorithm for Schedule Optimization")
     start_time = time.time()
     

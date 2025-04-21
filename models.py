@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Data Models for Genetic Algorithm Scheduler
 This module contains the shared data classes used throughout the application.
@@ -58,7 +56,7 @@ class Room:
 class Facilitator:
     """Represents a facilitator (instructor) who can oversee activities."""
     name: str
-    # Special case for Dr. Tyler
+    # Special case for Dr. Tyler because he's just so cool
     is_dr_tyler: bool = False
     
     def __str__(self) -> str:

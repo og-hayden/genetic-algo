@@ -1,16 +1,13 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Fitness Evaluation Module for the Genetic Algorithm Scheduler
 This module contains the implementation of the fitness function for evaluating schedules.
 """
 
-from typing import Dict, List, Set, Tuple, Optional
-import numpy as np
+from typing import Dict, List, Set, Tuple
 from dataclasses import dataclass
 
 # Import the data classes from models
-from models import Schedule, Activity, Room, Facilitator, TimeSlot, ActivityAssignment
+from models import Schedule, ActivityAssignment
 
 
 class FitnessEvaluator:
@@ -145,7 +142,7 @@ class FitnessEvaluator:
         if capacity < enrollment:
             return -0.5  # Room too small
         elif capacity > 6 * enrollment:
-            return -0.4  # Room way too big
+            return -0.4  # Room waaaay too big - what were they thinking?
         elif capacity > 3 * enrollment:
             return -0.2  # Room too big
         else:
